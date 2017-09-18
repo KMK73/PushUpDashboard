@@ -1,3 +1,4 @@
+import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/auth.guard';
@@ -12,6 +13,7 @@ import { CoreModule } from './core/core.module'
 const routes: Routes = [
   { path: '', component: ReadmePageComponent },
   { path: 'login', component: UserLoginComponent, },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard]},
   { path: 'uploads', loadChildren: './uploads/shared/upload.module#UploadModule' }
   // { path: 'uploads', component: UploadsListComponent, canActivate: [AuthGuard]},

@@ -23,10 +23,14 @@ import { UploadModule } from './uploads/shared/upload.module';
 import { UiModule } from './ui/shared/ui.module';
 ///// End FireStarter
 
+// Custom Components
+import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
+import { CalendarModule } from 'angular-calendar';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { UiModule } from './ui/shared/ui.module';
     ItemModule,
     UiModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    CalendarModule.forRoot(),
   ],
   bootstrap: [
     AppComponent

@@ -1,6 +1,6 @@
 <div *ngIf="!auth.currentUser; else alreadyLoggedIn">
 
-  <h3>Social Login</h3>
+    <h3>Social Login</h3>
 
 
     <button (click)="signInWithGoogle()" class="button btn-social btn-google">
@@ -11,7 +11,7 @@
       <i class="fa fa-github fa-lg"></i> Connect GitHub
     </button>
 
-    <button (click)="signInWithFacebook()" class="button  btn-social btn-facebook" disabled>
+    <button (click)="signInWithFacebook()" class="button  btn-social btn-facebook">
       <i class="fa fa-facebook fa-lg"></i> Connect Facebook
     </button>
 
@@ -23,7 +23,7 @@
 
     <h3>Anonymous Login</h3>
 
-      <button (click)="signInAnonymously()" class="button button-info">
+    <button (click)="signInAnonymously()" class="button button-info">
         <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
       </button>
 
@@ -38,7 +38,7 @@
 
 
 <ng-template #alreadyLoggedIn>
-  <p class="text-success">
-    Already logged in!
-  </p>
+    <p class="text-success">
+        Already logged in!
+    </p>
 </ng-template>
