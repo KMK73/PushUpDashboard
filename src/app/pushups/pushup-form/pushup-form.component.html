@@ -1,0 +1,21 @@
+<h3>How many completed Push ups?</h3>
+
+<label class="label">Amount: </label>
+
+<input placeholder="Amount of Push Ups" class="input" type="number" [(ngModel)]="item.amount" required #amount='ngModel' autofocus>
+
+<div *ngIf="amount.dirty">
+    <span *ngIf='amount.errors; then errors else valid'>template renders here...</span>
+</div>
+
+
+<button class="button is-primary" (click)='createItem()' [disabled]="!amount.valid">Save</button>
+
+
+<ng-template #valid>
+    <p class="help is-success">looks good!</p>
+</ng-template>
+
+<ng-template #errors>
+    <p class="help is-danger">form contains errors!</p>
+</ng-template>

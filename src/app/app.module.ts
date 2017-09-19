@@ -1,3 +1,4 @@
+import { DashboardModule } from './components/dashboard/dashboard.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -30,7 +31,6 @@ import { CalendarModule } from 'angular-calendar';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +42,7 @@ import { CalendarModule } from 'angular-calendar';
     UiModule,
     AngularFireModule.initializeApp(firebaseConfig),
     CalendarModule.forRoot(),
+    DashboardModule,
   ],
   bootstrap: [
     AppComponent

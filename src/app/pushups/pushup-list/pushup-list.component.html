@@ -1,0 +1,15 @@
+<h1>Push Ups</h1>
+
+<div *ngFor="let item of pushupItems | async" class="card">
+    <pushup-detail [item]='item'></pushup-detail>
+</div>
+
+<loading-spinner *ngIf="showSpinner"></loading-spinner>
+
+
+
+<button type="button" class="button is-danger" (click)='deleteItems()'>Delete Entire List</button>
+
+<hr>
+
+<pushup-form></pushup-form>
