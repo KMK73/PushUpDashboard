@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { PushUpService } from './../shared/pushup.service';
 import { Component, OnInit } from '@angular/core';
 import { PushUp } from '../shared/pushup';
@@ -11,7 +12,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 export class PushUpListComponent implements OnInit {
 
   pushupItems: FirebaseListObservable<PushUp[]>;
-
+  pushupTotal$: Observable<number>;
   showSpinner = true;
 
 
@@ -19,7 +20,17 @@ export class PushUpListComponent implements OnInit {
 
   ngOnInit() {
     this.pushupItems = this.pushupService.getItemsList({ limitToLast: 5 })
-    this.pushupItems.subscribe(() => this.showSpinner = false)
+    this.pushupItems.subscribe(
+      (items) => {
+        this.showSpinner = false;
+        items.forEach(
+            item => {
+              console.log(item);
+              this.pushupTotal$ += item.amount; 
+            }
+        )
+      }
+    )
   }
 
   deleteItems() {

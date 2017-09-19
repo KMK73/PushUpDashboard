@@ -1,5 +1,7 @@
-<!-- <ng-template [(view)]="view" [(viewDate)]="viewDate">
-</ng-template> -->
+<!-- MAIN USER INFO PANEL -->
+<div class="box" *ngIf="auth.currentUser">
+    <h3>Hey, {{ auth.currentUserDisplayName }}</h3>
+</div>
 <div class="row">
     <!-- <div class="col-sm-4">
         <h1>Push ups today {{viewDate}}</h1>

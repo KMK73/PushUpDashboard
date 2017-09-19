@@ -1,5 +1,7 @@
 <h1>Push Ups</h1>
-
+<div>
+    <h3>{{pushupTotal$}}</h3>
+</div>
 <div *ngFor="let item of pushupItems | async" class="card">
     <pushup-detail [item]='item'></pushup-detail>
 </div>

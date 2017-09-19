@@ -1,3 +1,4 @@
+import { AuthService } from './../../core/auth.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils/dist/calendar-utils';
 
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit {
   viewDate: Date = new Date();
 
   events: CalendarEvent[] = [];
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
   }

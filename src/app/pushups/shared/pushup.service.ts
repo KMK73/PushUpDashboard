@@ -1,3 +1,5 @@
+import { TopNavComponent } from './../../ui/top-nav/top-nav.component';
+import { Observable } from 'rxjs/Observable';
 import { PushUp } from './pushup';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
@@ -8,9 +10,10 @@ export class PushUpService {
 
   private basePath = '/push-ups';
 
-  $pushups: FirebaseListObservable<PushUp[]> = null; //  list of push up objects
-  $pushup: FirebaseObjectObservable<PushUp> = null; //   single object
+  pushups$: FirebaseListObservable<PushUp[]> = null; //  list of push up objects
+  pushup$: FirebaseObjectObservable<PushUp> = null; //   single object
   userId: string;
+  totalPushUps$: number = null;
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
@@ -28,15 +31,15 @@ export class PushUpService {
     // tslint:disable-next-line:curly
     if (!this.userId) return;
 
-    this.$pushups = this.db.list(`push-ups/${this.userId}`);
-    return this.$pushups;
+    this.pushups$ = this.db.list(`push-ups/${this.userId}`);
+    return this.pushups$;
   }
 
   // Return a single observable item
   getItem(key: string): FirebaseObjectObservable<PushUp> {
     const itemPath = `${this.basePath}/${key}`;
-    this.$pushup = this.db.object(itemPath)
-    return this.$pushup;
+    this.pushup$ = this.db.object(itemPath)
+    return this.pushup$;
   }
 
   // Create a bramd new push up
@@ -45,7 +48,7 @@ export class PushUpService {
     item.timeStamp = Date.now();
     item.uid = this.userId;
 
-    this.$pushups.push(item)
+    this.pushups$.push(item)
       .catch(error => this.handleError(error))
   }
 
@@ -53,19 +56,19 @@ export class PushUpService {
   // Update an exisiting item
   updateItem(key: string, value: any): void {
     if (!this.userId) return;
-    this.$pushups.update(key, value)
+    this.pushups$.update(key, value)
       .catch(error => this.handleError(error))
   }
 
   // Deletes a single item
   deleteItem(key: string): void {
-    this.$pushups.remove(key)
+    this.pushups$.remove(key)
       .catch(error => this.handleError(error))
   }
 
   // Deletes the entire list of items
   deleteAll(): void {
-    this.$pushups.remove()
+    this.pushups$.remove()
       .catch(error => this.handleError(error))
   }
 
