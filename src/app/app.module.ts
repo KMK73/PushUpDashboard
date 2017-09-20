@@ -42,7 +42,7 @@ import { CalendarModule } from 'angular-calendar';
     UiModule,
     AngularFireModule.initializeApp(firebaseConfig),
     CalendarModule.forRoot(),
-    DashboardModule,
+    DashboardModule
   ],
   bootstrap: [
     AppComponent

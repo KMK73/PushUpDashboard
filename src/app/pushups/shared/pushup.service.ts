@@ -13,7 +13,7 @@ export class PushUpService {
   pushups$: FirebaseListObservable<PushUp[]> = null; //  list of push up objects
   pushup$: FirebaseObjectObservable<PushUp> = null; //   single object
   userId: string;
-  totalPushUps$: number = null;
+  totalPushUps$: Observable<number>;
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
@@ -28,7 +28,6 @@ export class PushUpService {
   // You will usually call this from OnInit in a component
   getItemsList(query = {}): FirebaseListObservable<PushUp[]> {
     // if undefined user return
-    // tslint:disable-next-line:curly
     if (!this.userId) return;
 
     this.pushups$ = this.db.list(`push-ups/${this.userId}`);
@@ -71,6 +70,24 @@ export class PushUpService {
     this.pushups$.remove()
       .catch(error => this.handleError(error))
   }
+
+
+  // get totals of push ups
+  // getTotalPushUps(): Observable<number> {
+
+  //   this.db.list(`push-ups/${this.userId}`).subscribe(
+  //     (items) => {
+  //       items.forEach(
+  //           item => {
+  //             console.log(item);
+  //             this.totalPushUps$ += item.amount;
+  //           }
+  //       )
+  //       return this.totalPushUps$;
+  //     }
+  //   )
+  // }
+
 
 
   // Default error handling for all actions

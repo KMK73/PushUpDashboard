@@ -12,20 +12,28 @@ import { PushUp } from '../../pushups/shared/pushup';
 })
 export class UserProfileComponent implements OnInit {
 
-  pushupTotal: Observable<any>;
-  pushupItems: FirebaseListObservable<PushUp[]>;
+
+  pushupTotal$;
+  pushupItems;
 
   constructor(public auth: AuthService, public pushupService: PushUpService) {
-    // this.items = af.database.list(path)
-    // this.items.subscribe(items => items.forEach(item => console.log(item)));
   }
 
   ngOnInit() {
-    // this.pushupItems = this.pushupService.getItemsList({})
-    // this.pushupItems.subscribe(items => items.forEach(
-    //   item => console.log(item))
-    // );
-
+    // console.log('user profile');
+    // this.pushupTotal$ = this.pushupService.getTotalPushups().subscribe();
+    // debugger;
+    // console.log(this.pushupTotal$);
+    // let myItems = [];
+    // this.pushupItems = this.pushupService.getItemsList().subscribe((pushups) => {
+    //   pushups.forEach((item: PushUp) => {
+    //     console.log('push up item: ', item);
+    //     // let item = this.af.database.object('/items/'itemKey.$value);
+    //     // item.subscribe((itemData) => {
+    //     //   myItems.push(itemData);
+    //     // });
+    //   });
+    // });
   }
 
   logout() {

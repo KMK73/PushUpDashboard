@@ -12,25 +12,26 @@ import { FirebaseListObservable } from 'angularfire2/database';
 export class PushUpListComponent implements OnInit {
 
   pushupItems: FirebaseListObservable<PushUp[]>;
-  pushupTotal$: Observable<number>;
   showSpinner = true;
-
+  pushupTotal = 0; 
 
   constructor(private pushupService: PushUpService) { }
 
   ngOnInit() {
-    this.pushupItems = this.pushupService.getItemsList({ limitToLast: 5 })
-    this.pushupItems.subscribe(
-      (items) => {
-        this.showSpinner = false;
-        items.forEach(
-            item => {
-              console.log(item);
-              this.pushupTotal$ += item.amount; 
-            }
-        )
-      }
-    )
+    console.log('push up list');
+    this.pushupItems = this.pushupService.getItemsList()
+    this.pushupItems.subscribe((result) => {
+      this.showSpinner = false;
+      console.log(result);
+      // reset total to 0 every new update
+      this.pushupTotal = 0;
+      result.forEach(element => {
+        // create total push ups completed
+        this.pushupTotal += element.amount;
+      });
+    });
+
+
   }
 
   deleteItems() {
